@@ -342,7 +342,7 @@ function App() {
             solution={solution}
             hints={guesses}
             action={() => {
-              showAnswer('XXXXX')
+              window.confirm('Do you really give up?') && showAnswer('XXXXX')
             }}
           />
         </div>
