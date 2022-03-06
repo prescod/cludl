@@ -2,6 +2,7 @@
 .PHONY: build
 
 build:
+	rm -rf build/js build/css
 	npm run build
 
 publish:
