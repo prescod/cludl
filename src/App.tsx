@@ -45,6 +45,7 @@ import {
   loadStartTimeFromLocalStorage,
   loadTimeResultFromLocalStorage,
   saveTimeResultToLocalStorage,
+  saveStatsToLocalStorage,
 } from './lib/localStorage'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 
@@ -56,6 +57,21 @@ function App() {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
+  const [stats, setStats] = useState(() => loadStats())
+
+  if (window.location.hash.includes('gameStats')) {
+    const sentStatsEncoded = window.location.hash.substring(11)
+    const sentStatsJSON = decodeURI(sentStatsEncoded)
+    const sentStats = JSON.parse(sentStatsJSON)
+    const redirectURI = window.location.protocol + '//' + window.location.host
+    saveStatsToLocalStorage(sentStats)
+    window.location.href = redirectURI
+  } else if (
+    window.location.hostname.includes('prescod.github') &&
+    !window.location.hash.includes('noredirect')
+  ) {
+    pushToCludleGameCom()
+  }
 
   const { showError: showErrorAlert, showSuccess: showSuccessAlert } =
     useAlert()
@@ -99,8 +115,6 @@ function App() {
     }
     return loaded.guesses
   })
-
-  const [stats, setStats] = useState(() => loadStats())
 
   const [isHardMode, setIsHardMode] = useState(
     localStorage.getItem('gameMode')
@@ -363,6 +377,7 @@ function App() {
         isDarkMode={isDarkMode}
         isHighContrastMode={isHighContrastMode}
         timeResult={timeResult}
+        pushToCludleGameCom={pushToCludleGameCom}
       />
       <SettingsModal
         isOpen={isSettingsModalOpen}
@@ -377,6 +392,13 @@ function App() {
       <AlertContainer />
     </div>
   )
+}
+
+function pushToCludleGameCom() {
+  var uri = 'https://www.cluedlegame.com'
+  uri = 'http://localhost:3000'
+  window.location.href =
+    uri + '#gameStats=' + encodeURI(JSON.stringify(loadStats()))
 }
 
 export default App
