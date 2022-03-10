@@ -396,7 +396,6 @@ function App() {
 
 function pushToCludleGameCom() {
   var uri = 'https://www.cluedlegame.com'
-  uri = 'http://localhost:3000'
   window.location.href =
     uri + '#gameStats=' + encodeURI(JSON.stringify(loadStats()))
 }
