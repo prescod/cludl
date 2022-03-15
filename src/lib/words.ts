@@ -66,7 +66,7 @@ export const unicodeLength = (word: string) => {
 
 export const getWordOfDay = () => {
   // January 1, 2022 Game Epoch
-  const epoch = new Date(2022, 0)
+  const epoch = new Date(2022, 1, 19)
   const start = new Date(epoch)
   const today = new Date()
   today.setHours(0, 0, 0, 0)
