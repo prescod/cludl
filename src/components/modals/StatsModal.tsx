@@ -119,7 +119,7 @@ export const StatsModal = ({
         </div>
       )}
 
-      {window.location.hostname.includes('www.cludl.com') || (
+      {window.location.hostname.includes('cludl.com') || (
         <div>
           <p> &nbsp;</p>
           <button
