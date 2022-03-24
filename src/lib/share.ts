@@ -20,7 +20,7 @@ export const shareStatus = (
     (timerMessage ? (
       timerMessage
       + "\n") : "")
-    + "Play here: https://prescod.github.io/one-wordle/"
+    + "Play here: https://cludl.com/"
   )
 }
 
