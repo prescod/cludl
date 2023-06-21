@@ -97,11 +97,14 @@ function App() {
   const [isRevealing, setIsRevealing] = useState(false)
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
+    console.log(loaded?.solution, solution, loaded?.guesses[0], startword)
     // FIXME:
-    if (loaded?.solution !== solution) {
+    if (loaded?.solution !== solution || loaded?.guesses[0] !== startword) {
+      console.log('resetting')
       setStartTime(saveStartTimeToLocalStorage())
       return [startword]
     }
+    console.log('not resetting')
     setStartTime(loadStartTimeFromLocalStorage())
     const gameWasWon = loaded.guesses.includes(solution)
     if (gameWasWon) {
